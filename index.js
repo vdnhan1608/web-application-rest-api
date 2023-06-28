@@ -1,57 +1,29 @@
-const axios = require("axios");
+import { getAllDessertData, getAllPizzaData, getMeal } from "./service.js";
 
-const urlPizza = "https://pizza-and-desserts.p.rapidapi.com/pizzas";
-const urlDessert = "https://pizza-and-desserts.p.rapidapi.com/desserts";
+$(document).ready(async function () {
+  const data = await getMeal();
+  console.log({ 1: data[0] });
+  // GET API AND THEN AND HTML INTO THIS
 
-let options = {
-  method: "GET",
-  //   url: "https://pizza-and-desserts.p.rapidapi.com/pizzas",
-  headers: {
-    "X-RapidAPI-Key": "916f13e9c7mshbede9e4ee9d3040p127f52jsna04aa77b900c",
-    "X-RapidAPI-Host": "pizza-and-desserts.p.rapidapi.com",
-  },
-};
+  let section = $("section");
+  section.empty(); // CLEAR ALL THE HTML CODE BETWEEN
 
-const getAllDessertData = async () => {
-  try {
-    options = { ...options, url: urlDessert }; // Add url for all dessert
-    const response = await axios.request(options);
-    console.log(response.data);
-    console.log({ length: response.data.length }); // 5 object
-  } catch (error) {
-    console.error(error);
-  }
-};
+  // APPEND NEW HTML CODE BASED ON DATA
+  data.forEach((item) => {
+    section.append(`
+    <div class="item">
+    <img
+      src=${item.strCategoryThumb}
+      alt="pizza"
+    />
+    <h4>${item.strCategory}</h4>
+    <button>Order</button>
+  </div>
+`);
+  });
+  //   let button = $("button");
 
-const getAllPizaData = async () => {
-  try {
-    options = { ...options, url: urlPizza }; // Add url for all pizza
-    const response = await axios.request(options);
-    console.log(response.data);
-    console.log({ length: response.data.length }); // 31 object
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const getSpecificPizaData = async (index) => {
-  try {
-    options = { ...options, url: urlPizza + "/" + index }; // Add url for specific pizza
-    const response = await axios.request(options);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const getSpecificPizaDessert = async (index) => {
-  try {
-    options = { ...options, url: urlDessert + "/" + index }; // Add url for specific dessert
-    const response = await axios.request(options);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-getSpecificPizaDessert(1);
+  //   button.click(function () {
+  //     alert("Pressed");
+  //   });
+});
