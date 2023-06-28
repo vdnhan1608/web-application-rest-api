@@ -11,19 +11,44 @@ $(document).ready(async function () {
   // APPEND NEW HTML CODE BASED ON DATA
   data.forEach((item) => {
     section.append(`
-    <div class="item">
+    <div class="item" id=${item.idCategory}>
     <img
       src=${item.strCategoryThumb}
       alt="pizza"
     />
     <h4>${item.strCategory}</h4>
-    <button>Order</button>
+    <button id=${item.idCategory}>Order</button>
   </div>
 `);
   });
-  //   let button = $("button");
 
-  //   button.click(function () {
-  //     alert("Pressed");
-  //   });
+  console.log(section.prop("outerHTML"));
+  let button = $("button:not(dialog button)");
+  //   const dialog = $("dialog");
+  const dialog = document.querySelector("dialog");
+
+  // SHOW MODAL TO SHOW DETAILS
+  button.click(function () {
+    console.log(button.attr("id"));
+    const id = button.attr("id"); // id of the item
+
+    const img = $("#dialogImg");
+    img.attr("src", data[id].strCategoryThumb);
+    console.log(data[id].strCategoryThumb);
+
+    const category = $("#category");
+    category.text(data[id].strCategory);
+
+    const description = $("#description");
+    description.text(data[id].strCategoryDescription);
+
+    dialog.showModal();
+  });
+
+  // CLOSE MODAL
+  const closeBtn = $("#btnDialog");
+  closeBtn.click(function () {
+    // $("dialog").dialog("close");
+    dialog.close();
+  });
 });

@@ -71,6 +71,26 @@ nav a:hover {
   transform: scale(1.04);
 }
 
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+dialog .category .description {
+  text-align: center;
+}
+
+dialog .btnDialog {
+  text-align: center;
+}
+
 @media screen and (max-width: 1000px) {
   .items {
     grid-template-columns: repeat(2, 1fr);
