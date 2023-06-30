@@ -88,7 +88,7 @@ dialog .category .description {
 }
 
 dialog .btnDialog {
-  text-align: center;
+  margin: auto;
 }
 
 @media screen and (max-width: 1000px) {
