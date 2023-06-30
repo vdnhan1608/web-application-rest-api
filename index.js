@@ -17,20 +17,16 @@ $(document).ready(async function () {
       alt="pizza"
     />
     <h4>${item.strCategory}</h4>
-    <button id=${item.idCategory}>Order</button>
+    <button id=button${item.idCategory}>Order</button>
   </div>
 `);
   });
 
-  console.log(section.prop("outerHTML"));
-  let button = $("button:not(dialog button)");
-  //   const dialog = $("dialog");
   const dialog = document.querySelector("dialog");
 
   // SHOW MODAL TO SHOW DETAILS
-  button.click(function () {
-    console.log(button.attr("id"));
-    const id = button.attr("id"); // id of the item
+  $('[id^="button"]').click(function () {
+    const id = parseInt($(this).attr("id").slice(6)) - 1; // remove 'button' => id of the item
 
     const img = $("#dialogImg");
     img.attr("src", data[id].strCategoryThumb);
